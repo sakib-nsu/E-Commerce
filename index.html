@@ -6,6 +6,7 @@
     <title>E-commerce</title>
     <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/97f67d67c0.js" crossorigin="anonymous"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -44,8 +45,8 @@
       <div class="flex h-16 items-center justify-between gap-3">
         <!-- Brand -->
         <div class="flex items-center gap-3">
-          <div class="grid h-10 w-10 place-items-center rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 transition">
-            <span class="font-black">M</span>
+          <div class="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-200 text-white dark:bg-white dark:text-slate-900 transition">
+              <i class="fa-solid fa-bag-shopping"></i>
           </div>
           <div class="leading-tight">
             <div class="font-extrabold tracking-tight">E-Commerce</div>
@@ -78,7 +79,7 @@
 
           <!-- Cart Button -->
           <button id="cartBtn"
-            class="relative inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white
+            class="relative inline-flex items-center gap-2 rounded-2xl bg-emerald-200 px-4 py-2 text-sm font-semibold text-black
                    hover:opacity-95 transition active:scale-[0.98] dark:bg-white dark:text-slate-900">
             <span>Cart</span>
             <span id="cartCount"
@@ -167,6 +168,55 @@
 </section>
 
 
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer class="bg-slate-900 dark:bg-slate-950 text-white border-t border-slate-800 text-center">
+
+  <!-- Top footer grid -->
+  <div class="mx-auto max-w-6xl px-4 pt-14 pb-10 flex flex-col items-center justify-center text-center">
+    
+    <!-- Brand col -->
+    <div class="flex flex-col items-center justify-center">
+
+      <div class="flex flex-col items-center gap-3 mb-4">
+        <div class="grid h-10 w-10 place-items-center rounded-2xl bg-white text-slate-900 font-display font-black text-lg">
+          <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <div>
+          <div class="font-display font-black text-lg">E-Commerce</div>
+          <div class="text-xs text-slate-400 font-body">Shop smarter, live better</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-slate-400 font-body leading-relaxed max-w-xs mb-5 mx-auto">
+        Your one-stop destination for premium electronics, fashion, home essentials, and more. Trusted by thousands of happy customers.
+      </p>
+      
+      <!-- Socials -->
+      <div class="flex justify-center gap-2 mb-5">
+        <a href="#" class="w-9 h-9 rounded-xl bg-rose-400 hover:bg-slate-300 flex items-center justify-center text-sm transition active:scale-90">
+          <i class="fa-brands fa-square-twitter"></i>
+        </a>
+        <a href="#" class="w-9 h-9 rounded-xl bg-rose-400 hover:bg-slate-300 flex items-center justify-center text-sm transition active:scale-90">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <a href="#" class="w-9 h-9 rounded-xl bg-rose-400 hover:bg-slate-300 flex items-center justify-center text-sm transition active:scale-90">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+        <a href="#" class="w-9 h-9 rounded-xl bg-rose-400 hover:bg-slate-300 flex items-center justify-center text-sm transition active:scale-90">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+
+      <p class="text-xs text-slate-500 font-body">
+        © 2026 E-Commerce. All rights reserved. Made in Bangladesh
+      </p>
+
+    </div>
+  </div>
+
+</footer>
 
 </body>
 </html>
