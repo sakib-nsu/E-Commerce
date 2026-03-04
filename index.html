@@ -38,135 +38,236 @@
       }
     }
   </script>
+  <style>
+  @keyframes blob1 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(40px,-30px) scale(1.12)} 66%{transform:translate(-20px,20px) scale(0.94)} }
+  @keyframes blob2 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-35px,25px) scale(1.08)} 66%{transform:translate(25px,-20px) scale(0.96)} }
+  @keyframes blob3 { 0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(20px,30px) scale(1.1)} 80%{transform:translate(-30px,-10px) scale(0.92)} }
+  @keyframes floatA { 0%,100%{transform:translateY(0px) rotate(-2deg)} 50%{transform:translateY(-14px) rotate(2deg)} }
+  @keyframes floatB { 0%,100%{transform:translateY(0px) rotate(3deg)}  50%{transform:translateY(-18px) rotate(-1deg)} }
+  @keyframes floatC { 0%,100%{transform:translateY(0px) rotate(-1deg)} 50%{transform:translateY(-10px) rotate(3deg)} }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+  .hblob1{animation:blob1 7s ease-in-out infinite}
+  .hblob2{animation:blob2 9s ease-in-out infinite 1s}
+  .hblob3{animation:blob3 8s ease-in-out infinite 2s}
+  .hfloat1{animation:floatA 4s ease-in-out infinite}
+  .hfloat2{animation:floatB 5s ease-in-out infinite .8s}
+  .hfloat3{animation:floatC 4.5s ease-in-out infinite 1.6s}
+  .ticker-wrap{overflow:hidden}
+  .ticker-track{display:flex;width:max-content;animation:ticker 22s linear infinite}
+  .ticker-track:hover{animation-play-state:paused}
+</style>
 </head>
+
 <body class="h-full bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
-     <header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/70">
-    <div class="mx-auto max-w-6xl px-4">
-      <div class="flex h-16 items-center justify-between gap-3">
-        <!-- Brand -->
-        <div class="flex items-center gap-3">
-          <div class="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-200 text-white dark:bg-white dark:text-slate-900 transition">
-              <span class="text-black"><i class="fa-solid fa-bag-shopping"></i></span>
-          </div>
-          <div class="leading-tight">
-            <div class="font-extrabold tracking-tight text-2xl text-teal-600">E-Commerce</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400">Online Shopping</div>
-          </div>
+     
+  
+<!-- ══════════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════════ -->
+<header class="sticky top-0 z-40 border-b border-slate-200/70 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/70 transition-colors duration-300">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="flex h-16 items-center justify-between gap-3">
+
+      <!-- Brand -->
+      <a href="#" class="flex items-center gap-3 flex-shrink-0">
+        <div class="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-200 dark:bg-white transition-all hover:scale-105">
+          <span class="text-emerald-700 dark:text-slate-900 text-lg"><i class="fa-solid fa-bag-shopping"></i></span>
         </div>
-
-        <!-- Search -->
-        <div class="hidden md:flex flex-1 max-w-xl">
-          <div class="relative w-full">
-            <input id="searchInput" type="text" placeholder="Search products..."
-              class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm outline-none
-                     focus:ring-2 focus:ring-slate-900/10 dark:border-slate-800 dark:bg-slate-900/40 dark:focus:ring-white/10
-                     transition" />
-            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" viewBox="0 0 24 24" fill="none">
-              <path d="M21 21l-4.3-4.3m1.3-5.2a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
+        <div class="leading-tight hidden sm:block">
+          <div class="font-display font-extrabold tracking-tight text-xl text-teal-600 dark:text-teal-400">E-Commerce</div>
+          <div class="text-[10px] text-slate-500 dark:text-slate-400 font-body">Online Shopping</div>
         </div>
+      </a>
 
-        <!-- Actions -->
-        <div class="flex items-center gap-2">
-          <!-- Theme Toggle -->
-          <button id="themeBtn"
-            class="group inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm
-                   hover:shadow-sm dark:border-slate-800 dark:bg-slate-900/40 transition active:scale-[0.98]">
-            <span id="themeIcon" class="text-base">🌙</span>
-            <span class="hidden sm:inline">Theme</span>
-          </button>
-
-          <!-- Cart Button -->
-          <button id="cartBtn"
-            class="relative inline-flex items-center gap-2 rounded-2xl bg-emerald-200 px-4 py-2 text-sm font-semibold text-black
-                   hover:opacity-95 transition active:scale-[0.98] dark:bg-white dark:text-slate-900">
-            <span>Cart</span>
-            <span id="cartCount"
-              class="ml-1 grid min-w-[22px] place-items-center rounded-full bg-white px-1.5 py-0.5 text-xs font-bold text-black
-                     dark:bg-slate-900/10 dark:text-slate-900">0</span>
-          </button>
+      <!-- Desktop Search -->
+      <div class="hidden md:flex flex-1 max-w-xl">
+        <div class="relative w-full">
+          <input id="searchInput" type="text" placeholder="Search products..."
+            class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm outline-none font-body
+                   focus:ring-2 focus:ring-teal-400/30 focus:border-teal-300 focus:bg-white
+                   dark:border-slate-800 dark:bg-slate-900/40 dark:focus:ring-teal-400/20 dark:focus:border-teal-700 transition-all" />
+          <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" viewBox="0 0 24 24" fill="none">
+            <path d="M21 21l-4.3-4.3m1.3-5.2a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
         </div>
       </div>
 
-      <!-- Mobile search -->
-      <div class="md:hidden pb-3">
-        <input id="searchInputMobile" type="text" placeholder="Search products..."
-          class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm outline-none
-                 focus:ring-2 focus:ring-slate-900/10 dark:border-slate-800 dark:bg-slate-900/40 dark:focus:ring-white/10
-                 transition" />
+      <!-- Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Theme Toggle -->
+        <button id="themeBtn" title="Toggle theme"
+          class="group inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-sm font-body
+                 hover:shadow-sm hover:border-teal-200 dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-teal-700 transition-all active:scale-[0.98]">
+          <span id="themeIcon" class="text-base leading-none">🌙</span>
+          <span class="hidden sm:inline font-medium text-xs">Theme</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button id="cartBtn"
+          class="relative inline-flex items-center gap-2 rounded-2xl bg-emerald-200 px-4 py-2 text-sm font-semibold text-black font-body
+                 hover:bg-emerald-300 transition-all active:scale-[0.98] dark:bg-emerald-700 dark:text-white dark:hover:bg-emerald-600">
+          <i class="fa-solid fa-cart-shopping text-sm"></i>
+          <span class="hidden sm:inline">Cart</span>
+          <span id="cartCount"
+            class="ml-0.5 min-w-[22px] text-center rounded-full bg-white px-1.5 py-0.5 text-xs font-bold text-black
+                   dark:bg-slate-900 dark:text-white leading-tight">0</span>
+        </button>
       </div>
     </div>
-  </header>
-    
-<!-- ══════════════════════════════════════════
-     HERO BANNER
-══════════════════════════════════════════ -->
-<section class="relative overflow-hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-  <!-- Background pattern -->
-  <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.06]"
-       style="background-image: radial-gradient(circle, #0f172a 1px, transparent 1px); background-size: 28px 28px;"></div>
 
-  <div class="mx-auto max-w-6xl px-4 py-14 md:py-20 relative">
-    <div class="flex flex-col md:flex-row items-center gap-10">
-      <!-- Text -->
-      <div class="flex-1 animate-fadeUp">
-        <span class="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-slate-800 px-3 py-1 text-xs font-semibold text-slate-500 dark:text-slate-400 mb-4">
-          <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-          New arrivals every week
-        </span>
-        <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] gradient-text mb-4">
-          Shop Smarter.<br/>Live Better.
-        </h1>
-        <p class="text-slate-500 dark:text-slate-400 font-body text-base md:text-lg max-w-md mb-8 leading-relaxed">
-          Curated products across electronics, fashion, home &amp; more. Fast delivery. Easy returns. Always reliable.
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <button id="scrollProductsBtn"
-            class="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-bold text-white font-body
-                   hover:bg-slate-700 transition active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 shadow-lg shadow-slate-900/20 dark:shadow-white/10">
-            Browse Products →
-          </button>
-          <button id="clearCartBtn"
-            class="rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-bold font-body
-                   hover:bg-slate-50 hover:shadow-sm dark:border-slate-800 dark:bg-slate-900/60 dark:hover:bg-slate-800 transition active:scale-95">
-            Clear Cart
-          </button>
-        </div>
-
-        <!-- Trust Badges -->
-        <div class="flex flex-wrap gap-3 mt-8">
-          <div class="trust-badge border border-slate-200 dark:border-slate-800 rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold font-body text-slate-600 dark:text-slate-300">
-            🚀 <span>Fast Shipping</span>
-          </div>
-          <div class="trust-badge border border-slate-200 dark:border-slate-800 rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold font-body text-slate-600 dark:text-slate-300">
-            🔒 <span>Secure Checkout</span>
-          </div>
-          <div class="trust-badge border border-slate-200 dark:border-slate-800 rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold font-body text-slate-600 dark:text-slate-300">
-            ↩️ <span>30-Day Returns</span>
-          </div>
-          <div class="trust-badge border border-slate-200 dark:border-slate-800 rounded-2xl px-3 py-2 flex items-center gap-2 text-xs font-semibold font-body text-slate-600 dark:text-slate-300">
-            💳 <span>Cash on Delivery</span>
-          </div>
-        </div>
+    <!-- Mobile Search -->
+    <div class="md:hidden pb-3">
+      <div class="relative">
+        <input id="searchInputMobile" type="text" placeholder="Search products..."
+          class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-2.5 pr-10 text-sm outline-none font-body
+                 focus:ring-2 focus:ring-teal-400/30 focus:border-teal-300
+                 dark:border-slate-800 dark:bg-slate-900/40 dark:focus:ring-teal-400/20 transition-all" />
+        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" viewBox="0 0 24 24" fill="none">
+          <path d="M21 21l-4.3-4.3m1.3-5.2a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
       </div>
+    </div>
+  </div>
+</header>
 
-      <!-- Hero visual -->
-      <div class="flex-shrink-0 animate-fadeUp" style="animation-delay:150ms">
-        <div class="relative w-52 h-52 md:w-64 md:h-64">
-          <div class="absolute inset-0 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-700"></div>
-          <div class="absolute inset-4 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center text-6xl md:text-7xl shadow-inner">
-            🛍️
+<!-- ══════════════════════════════════════════
+     HERO BANNER — Colorful E-Commerce
+══════════════════════════════════════════ -->
+<section class="relative overflow-hidden min-h-[600px] md:min-h-[680px] flex flex-col">
+
+  <!-- ░░ COLORFUL MESH BACKGROUND ░░ -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0" style="background:linear-gradient(135deg,#1a0533 0%,#0d1b4b 25%,#0a3040 50%,#1a2a0a 75%,#3b0a1a 100%)"></div>
+    <div class="hblob1 absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full opacity-60" style="background:radial-gradient(circle,#7c3aed 0%,#4f46e5 40%,transparent 70%);filter:blur(60px)"></div>
+    <div class="hblob2 absolute top-20 right-0 w-[480px] h-[480px] rounded-full opacity-55" style="background:radial-gradient(circle,#db2777 0%,#f97316 50%,transparent 70%);filter:blur(65px)"></div>
+    <div class="hblob3 absolute bottom-0 left-1/3 w-[420px] h-[420px] rounded-full opacity-50" style="background:radial-gradient(circle,#059669 0%,#0891b2 50%,transparent 70%);filter:blur(70px)"></div>
+    <div class="hblob1 absolute bottom-10 right-1/4 w-[300px] h-[300px] rounded-full opacity-40" style="background:radial-gradient(circle,#eab308 0%,#f97316 60%,transparent 70%);filter:blur(55px)"></div>
+    <div class="absolute inset-0 opacity-[0.06]" style="background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:40px 40px"></div>
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 30%,rgba(0,0,0,0.35) 100%)"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-32 z-10" style="background:linear-gradient(to top,var(--page-bg,#f8fafc),transparent)"></div>
+  </div>
+
+  <!-- ░░ SCATTERED FLOATING EMOJIS ░░ -->
+  <div class="absolute inset-0 z-[1] pointer-events-none select-none">
+    <span class="hfloat1 absolute top-[8%]  left-[6%]  text-4xl opacity-20">🛍️</span>
+    <span class="hfloat2 absolute top-[15%] right-[8%] text-3xl opacity-15">📦</span>
+    <span class="hfloat3 absolute top-[55%] left-[4%]  text-3xl opacity-15">🎧</span>
+    <span class="hfloat1 absolute top-[70%] right-[6%] text-4xl opacity-15">👟</span>
+    <span class="hfloat2 absolute top-[30%] left-[2%]  text-2xl opacity-10">⌚</span>
+    <span class="hfloat3 absolute bottom-[20%] left-[15%] text-3xl opacity-12">☕</span>
+    <span class="hfloat1 absolute top-[12%] left-[48%] text-2xl opacity-10">💄</span>
+    <span class="hfloat2 absolute bottom-[28%] right-[14%] text-2xl opacity-12">🔊</span>
+  </div>
+
+  <!-- ░░ MAIN CONTENT ░░ -->
+  <div class="relative z-10 flex-1 flex items-center">
+    <div class="mx-auto max-w-6xl px-4 py-14 md:py-20 w-full">
+      <div class="flex flex-col lg:flex-row items-center gap-12">
+
+        <!-- Left text -->
+        <div class="flex-1 text-center lg:text-left animate-fadeUp">
+          <span class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold font-body mb-5 shadow-lg"
+                style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(12px);color:rgba(255,255,255,0.9)">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse inline-block"></span>
+            New arrivals every week &nbsp;·&nbsp; Free shipping over ৳500
+          </span>
+
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.04] mb-5 drop-shadow-2xl">
+            <span class="text-white">Shop</span>
+            <span class="block" style="background:linear-gradient(90deg,#fbbf24,#f97316,#ec4899,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Smarter.</span>
+            <span style="color:rgba(255,255,255,0.88)">Live Better.</span>
+          </h1>
+
+          <p class="font-body text-base md:text-lg leading-relaxed mb-8 max-w-md mx-auto lg:mx-0" style="color:rgba(255,255,255,0.6)">
+            Curated products across electronics, fashion, home &amp; more.<br class="hidden md:block"/>
+            Fast delivery. Easy returns. Always reliable.
+          </p>
+
+          <div class="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
+            <button id="scrollProductsBtn"
+              class="rounded-2xl px-7 py-3.5 text-sm font-black font-body text-slate-900 transition-all active:scale-95 hover:scale-[1.03]"
+              style="background:linear-gradient(135deg,#fbbf24 0%,#f97316 50%,#ec4899 100%);box-shadow:0 8px 32px rgba(249,115,22,0.45)">
+              Browse Products →
+            </button>
+            <button id="clearCartBtn"
+              class="rounded-2xl px-7 py-3.5 text-sm font-bold font-body text-white transition-all active:scale-95 hover:scale-[1.03]"
+              style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(12px)">
+              Clear Cart
+            </button>
           </div>
-          <!-- Orbiting badges -->
-          <div class="absolute -top-2 -right-2 bg-green-500 text-white text-[10px] font-bold rounded-full px-2 py-1 shadow-lg animate-bounce">NEW</div>
-          <div class="absolute -bottom-2 -left-2 bg-amber-400 text-slate-900 text-[10px] font-bold rounded-full px-2 py-1 shadow-lg" style="animation: bounce 1s infinite 0.5s">HOT</div>
+
+          <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+            <div class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold font-body hover:scale-105 transition cursor-default" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);color:rgba(255,255,255,0.85)">🚀 Fast Shipping</div>
+            <div class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold font-body hover:scale-105 transition cursor-default" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);color:rgba(255,255,255,0.85)">🔒 Secure Checkout</div>
+            <div class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold font-body hover:scale-105 transition cursor-default" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);color:rgba(255,255,255,0.85)">↩️ 30-Day Returns</div>
+            <div class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold font-body hover:scale-105 transition cursor-default" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);backdrop-filter:blur(8px);color:rgba(255,255,255,0.85)">💳 Cash on Delivery</div>
+          </div>
+        </div>
+
+        <!-- Right: glassmorphic product cards -->
+        <div class="flex-shrink-0 w-full max-w-xs animate-fadeUp" style="animation-delay:200ms">
+          <div class="flex flex-col gap-3">
+            <div class="hfloat1 flex items-center gap-3 rounded-2xl px-4 py-3 cursor-pointer hover:scale-[1.03] transition-all shadow-2xl" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(16px)">
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">🎧</div>
+              <div class="flex-1 min-w-0"><p class="text-white font-display font-black text-sm">Headphones</p><p class="font-body text-xs" style="color:rgba(255,255,255,0.6)">৳3,490</p></div>
+              <span class="text-slate-900 text-[9px] font-black px-2 py-0.5 rounded-full" style="background:linear-gradient(135deg,#fbbf24,#f97316)">HOT 🔥</span>
+            </div>
+            <div class="hfloat2 flex items-center gap-3 rounded-2xl px-4 py-3 cursor-pointer hover:scale-[1.03] transition-all shadow-2xl ml-6" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(16px)">
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background:linear-gradient(135deg,#059669,#0891b2)">⌚</div>
+              <div class="flex-1 min-w-0"><p class="text-white font-display font-black text-sm">Smart Watch</p><p class="font-body text-xs" style="color:rgba(255,255,255,0.6)">৳5,990</p></div>
+              <span class="text-white text-[9px] font-black px-2 py-0.5 rounded-full" style="background:linear-gradient(135deg,#10b981,#059669)">NEW ✨</span>
+            </div>
+            <div class="hfloat3 flex items-center gap-3 rounded-2xl px-4 py-3 cursor-pointer hover:scale-[1.03] transition-all shadow-2xl" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(16px)">
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background:linear-gradient(135deg,#db2777,#f97316)">👟</div>
+              <div class="flex-1 min-w-0"><p class="text-white font-display font-black text-sm">Running Shoes</p><p class="font-body text-xs" style="color:rgba(255,255,255,0.6)">৳4,500</p></div>
+              <span class="text-white text-[9px] font-black px-2 py-0.5 rounded-full" style="background:linear-gradient(135deg,#ef4444,#dc2626)">SALE 🏷️</span>
+            </div>
+            <div class="hfloat1 flex items-center gap-3 rounded-2xl px-4 py-3 cursor-pointer hover:scale-[1.03] transition-all shadow-2xl ml-4" style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(16px)">
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl flex-shrink-0" style="background:linear-gradient(135deg,#eab308,#d97706)">☕</div>
+              <div class="flex-1 min-w-0"><p class="text-white font-display font-black text-sm">Coffee Set</p><p class="font-body text-xs" style="color:rgba(255,255,255,0.6)">৳2,400</p></div>
+              <span class="text-white text-[9px] font-black px-2 py-0.5 rounded-full" style="background:linear-gradient(135deg,#0ea5e9,#0891b2)">TOP ⭐</span>
+            </div>
+            <div class="flex items-center justify-center gap-2 rounded-full px-5 py-2.5 ml-2 shadow-xl" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(12px)">
+              <span style="color:#fbbf24">★★★★★</span>
+              <span class="font-body text-xs font-semibold" style="color:rgba(255,255,255,0.8)">4.9 · 12k+ reviews</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
 
+  <!-- ░░ STATS ░░ -->
+  <div class="relative z-10 pb-8">
+    <div class="mx-auto max-w-6xl px-4 hidden md:flex items-center gap-8">
+      <div class="flex items-baseline gap-2 font-body text-sm" style="color:rgba(255,255,255,0.5)"><span class="font-display font-black text-white text-2xl">50K+</span> Happy Customers</div>
+      <div class="w-px h-5 opacity-20 bg-white"></div>
+      <div class="flex items-baseline gap-2 font-body text-sm" style="color:rgba(255,255,255,0.5)"><span class="font-display font-black text-white text-2xl">500+</span> Products</div>
+      <div class="w-px h-5 opacity-20 bg-white"></div>
+      <div class="flex items-baseline gap-2 font-body text-sm" style="color:rgba(255,255,255,0.5)"><span class="font-display font-black text-white text-2xl">4.9★</span> Avg Rating</div>
+      <div class="w-px h-5 opacity-20 bg-white"></div>
+      <div class="flex items-baseline gap-2 font-body text-sm" style="color:rgba(255,255,255,0.5)"><span class="font-display font-black text-white text-2xl">24/7</span> Support</div>
+    </div>
+  </div>
+
+  <!-- ░░ SCROLLING TICKER ░░ -->
+  <div class="relative z-10 ticker-wrap py-2.5" style="background:rgba(255,255,255,0.06);border-top:1px solid rgba(255,255,255,0.1)">
+    <div class="ticker-track">
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">🛍️ FREE SHIPPING OVER ৳500</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">⚡ NEW ARRIVALS EVERY WEEK</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">🔥 UP TO 40% OFF ELECTRONICS</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">💳 CASH ON DELIVERY AVAILABLE</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">↩️ 30-DAY EASY RETURNS</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">🌟 OVER 50,000 HAPPY CUSTOMERS</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">🛍️ FREE SHIPPING OVER ৳500</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">⚡ NEW ARRIVALS EVERY WEEK</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">🔥 UP TO 40% OFF ELECTRONICS</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">💳 CASH ON DELIVERY AVAILABLE</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">↩️ 30-DAY EASY RETURNS</span>
+      <span class="font-body text-xs font-semibold px-8 whitespace-nowrap" style="color:rgba(12, 38, 109, 0.65)">🌟 OVER 50,000 HAPPY CUSTOMERS</span>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      FOOTER
